@@ -6,6 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeMode themeMode = ThemeMode.dark;
 Locale locale = Locale('en');
 
+selectedLanguageChanged() {
+  if (locale == Locale('en')) {
+    locale = Locale('fa');
+  } else {
+    locale = Locale('en');
+  }
+}
 
 enum Language {
   en,
@@ -99,4 +106,3 @@ class MyAppThemeConfig {
           fontFamily: faPrimaryFontFamily),
       button: TextStyle(fontFamily: faPrimaryFontFamily));
 }
-
