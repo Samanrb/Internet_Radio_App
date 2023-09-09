@@ -1,0 +1,15 @@
+{
+       "login": "ورود",
+       "signup": "ثبت نام",
+       "password": "رمز عبور",
+       "welcomeBack": "خوش آمدید",
+       "signInText": "ورود با حساب کاربری",
+       "username": "نام کاربری",
+       "forgotPass": "رمز عبور خود را فراموش کرده اید؟",
+       "resetHere": "بازیابی رمز عبور",
+       "signInWith": "ورود با",
+       "show": "مشاهده",
+       "hide": "پنهان",
+       "fullname": "نام و نام خانوادگی",
+       "enterYourInforation": "لطفا مشخصات خود را وارد کنید"
+}

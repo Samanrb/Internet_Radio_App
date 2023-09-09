@@ -1,0 +1,15 @@
+{
+       "login": "LOGIN",
+       "signup": "SIGN UP",
+       "password": "password",
+       "welcomeBack": "Welcome back",
+       "signInText": "Sign in with your account",
+       "username": "Username",
+       "forgotPass": "Forgot your password?",
+       "resetHere": "Reset here",
+       "signInWith": "OR SIGN IN WITH",
+       "show": "Show",
+       "hide": "Hide",
+       "fullname": "Fullname",
+       "enterYourInforation": "Please enter your inforation"
+}
