@@ -21,7 +21,7 @@ enum Language {
 
 class MyAppThemeConfig {
   static const String faPrimaryFontFamily = 'IranYekan';
-  final Color primaryColor = Colors.pink.shade400;
+  final Color primaryColor = Color.fromARGB(255, 35, 53, 185);
   final Color primaryTextColor;
   final Color secondaryTextColor;
   final Color surfaceColor;

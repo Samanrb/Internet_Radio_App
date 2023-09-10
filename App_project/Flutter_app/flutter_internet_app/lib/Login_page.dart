@@ -7,6 +7,7 @@ import 'package:flutter_internet_app/Variables.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
 class Login_page extends StatefulWidget {
   final Function() toggleThemeMode;
@@ -207,7 +208,7 @@ class _AuthState extends State<Auth> {
                         ),
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(30, 40, 30, 30),
+                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
                             child: selectedTab == SelectedTab.login
                                 ? const _login_page()
                                 : const _signup_page(),
@@ -236,7 +237,6 @@ class _login_page extends StatefulWidget {
 class __login_pageState extends State<_login_page> {
   final _loginEmail = TextEditingController();
   final _loginPass = TextEditingController();
-  
 
   @override
   void dispose() {
@@ -267,11 +267,15 @@ class __login_pageState extends State<_login_page> {
           height: 16,
         ),
         TextField(
+          //email
           autocorrect: false,
           controller: _loginEmail,
-          decoration: InputDecoration(label: Text(localization.username)),
+          decoration: InputDecoration(label: Text(localization.email)),
         ),
-        PasswordTextField(textController: _loginPass),
+        PasswordTextField(
+          textController: _loginPass,
+          onPasswordValidation: (bool isValid) {},
+        ),
         const SizedBox(
           height: 24,
         ),
@@ -345,13 +349,14 @@ class _signup_page extends StatefulWidget {
   const _signup_page({super.key});
 
   @override
-  State<_signup_page> createState() => __signup_pageState();
+  State<_signup_page> createState() => _signup_pageState();
 }
 
-class __signup_pageState extends State<_signup_page> {
+class _signup_pageState extends State<_signup_page> {
   final _signupEmail = TextEditingController();
   final _signupPass = TextEditingController();
   final _signupName = TextEditingController();
+  bool isPasswordOk = false;
 
   @override
   void dispose() {
@@ -361,6 +366,12 @@ class __signup_pageState extends State<_signup_page> {
     super.dispose();
   }
 
+  void updatePasswordValidation(bool isValid) {
+    setState(() {
+      isPasswordOk = isValid;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
@@ -368,95 +379,98 @@ class __signup_pageState extends State<_signup_page> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          localization.welcomeBack,
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+      Text(
+        localization.welcomeBack,
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+      ),
+      const SizedBox(
+        height: 5,
+      ),
+      Text(
+        localization.enterYourInforation,
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+      ),
+      const SizedBox(
+        height: 5,
+      ),
+      TextField(
+        //Fullname
+        autocorrect: false,
+        controller: _signupName,
+        decoration: InputDecoration(label: Text(localization.fullname)),
+      ),
+      TextField(
+        //email
+        autocorrect: false,
+        controller: _signupEmail,
+        decoration: InputDecoration(label: Text(localization.email)),
+      ),
+      PasswordTextField(
+        textController: _signupPass,
+        onPasswordValidation: updatePasswordValidation,
+      ),
+      ElevatedButton(
+        onPressed: isPasswordOk &&
+                _signupName.text.isNotEmpty &&
+                _signupEmail.text.isNotEmpty
+            ? () {
+                debugPrint(
+                    "Fullname:  ${_signupName.text}\nUsername:  ${_signupEmail.text}\nPass:  ${_signupPass.text}");
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => Show_inputs(
+                //           _signupEmail.text, _signupPass.text, _signupName.text)),
+                // );
+              }
+            : null,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(255, 35, 53, 185)),
+            minimumSize: MaterialStateProperty.all(
+              Size(MediaQuery.of(context).size.width, 60),
+            ),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)))),
+        child: Text(
+          localization.signup,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(
-          localization.enterYourInforation,
+      ),
+      const SizedBox(
+        height: 25,
+      ),
+      Center(
+        child: Text(
+          localization.signInWith,
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        TextField(
-          autocorrect: false,
-          controller: _signupName,
-          decoration: InputDecoration(label: Text(localization.fullname)),
-        ),
-        TextField(
-          autocorrect: false,
-          controller: _signupEmail,
-          decoration: InputDecoration(label: Text(localization.username)),
-        ),
-        PasswordTextField(textController: _signupPass),
-        const SizedBox(
-          height: 24,
-        ),
-        ElevatedButton(
-          onPressed: () {
-            debugPrint(
-                "Fullname:  ${_signupName.text}\nUsername:  ${_signupEmail.text}\nPass:  ${_signupPass.text}");
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => Show_inputs(
-            //           _signupEmail.text, _signupPass.text, _signupName.text)),
-            // );
-          },
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 35, 53, 185)),
-              minimumSize: MaterialStateProperty.all(
-                Size(MediaQuery.of(context).size.width, 60),
-              ),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)))),
-          child: Text(
-            localization.signup,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        Center(
-          child: Text(
-            localization.signInWith,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-          ),
-        ),
-        Padding(
+      ),
+      Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/Google.jpg'),
-              const SizedBox(
-                width: 24,
-              ),
-              Image.asset('assets/images/Facebook.jpg'),
-              const SizedBox(
-                width: 24,
-              ),
-              Image.asset('assets/images/Twitter.jpg'),
-            ],
-          ),
-        )
-      ],
-    );
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset('assets/images/Google.jpg'),
+            const SizedBox(
+              width: 24,
+            ),
+            Image.asset('assets/images/Facebook.jpg'),
+            const SizedBox(
+              width: 24,
+            ),
+            Image.asset('assets/images/Twitter.jpg'),
+          ]))
+    ]);
   }
 }
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController textController;
+  final Function(bool isValid) onPasswordValidation;
 
   const PasswordTextField({
     Key? key,
     required this.textController,
+    required this.onPasswordValidation,
   }) : super(key: key);
 
   @override
@@ -465,31 +479,69 @@ class PasswordTextField extends StatefulWidget {
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
   bool obscureText = true;
-  
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return TextField(
-      controller: widget.textController, // Use the controller from the widget
-      obscureText: obscureText,
-      enableSuggestions: false,
-      autocorrect: false,
-      decoration: InputDecoration(
-        label: Text(localization.password),
-        suffix: InkWell(
-          onTap: () {
-            setState(() {
-              obscureText = !obscureText;
-            });
-          },
-          child: Text(
-            obscureText ? localization.show : localization.hide,
-            style: TextStyle(
-                fontSize: 14, color: Theme.of(context).colorScheme.primary),
+    return Column(
+      children: [
+        TextField(
+          controller:
+              widget.textController, // Use the controller from the widget
+          obscureText: obscureText,
+          enableSuggestions: false,
+          autocorrect: false,
+          decoration: InputDecoration(
+            label: Text(localization.password),
+            suffix: InkWell(
+              onTap: () {
+                setState(() {
+                  obscureText = !obscureText;
+                });
+              },
+              child: Text(
+                obscureText ? localization.show : localization.hide,
+                style: TextStyle(
+                    fontSize: 14, color: Theme.of(context).colorScheme.primary),
+              ),
+            ),
           ),
         ),
-      ),
+        BlocBuilder<SelectedTabCubitCubit, SelectedTabCubitState>(
+          builder: (context, state) {
+            final selectedTab = state is SelectedTabChanged
+                ? state.selectedTab
+                : SelectedTab.login;
+            if (selectedTab == SelectedTab.signup) {
+              return FlutterPwValidator(
+                controller: widget.textController,
+                minLength: 8,
+                uppercaseCharCount: 1,
+                lowercaseCharCount: 1,
+                numericCharCount: 2,
+                specialCharCount: 1,
+                width: 400,
+                height: 150,
+                onSuccess: () {
+                  print(selectedTab);
+                  print("ok");
+                  widget.onPasswordValidation(true);
+                },
+                onFail: null,
+                successColor: Color.fromARGB(255, 35, 53, 185),
+              );
+            } else {
+              return SizedBox(
+                height: 1,
+              );
+            }
+          },
+        ),
+        SizedBox(
+          height: 5,
+        )
+      ],
     );
   }
 }

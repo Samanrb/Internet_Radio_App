@@ -4,7 +4,7 @@
        "password": "رمز عبور",
        "welcomeBack": "خوش آمدید",
        "signInText": "ورود با حساب کاربری",
-       "username": "نام کاربری",
+       "email": "آدرس ایمیل",
        "forgotPass": "رمز عبور خود را فراموش کرده اید؟",
        "resetHere": "بازیابی رمز عبور",
        "signInWith": "ورود با",

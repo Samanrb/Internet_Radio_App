@@ -4,7 +4,7 @@
        "password": "password",
        "welcomeBack": "Welcome back",
        "signInText": "Sign in with your account",
-       "username": "Username",
+       "email": "Email",
        "forgotPass": "Forgot your password?",
        "resetHere": "Reset here",
        "signInWith": "OR SIGN IN WITH",
