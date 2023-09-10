@@ -208,7 +208,7 @@ class _AuthState extends State<Auth> {
                         ),
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
+                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                             child: selectedTab == SelectedTab.login
                                 ? const _login_page()
                                 : const _signup_page(),
@@ -540,7 +540,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         ),
         SizedBox(
           height: 5,
-        )
+        ),
       ],
     );
   }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_app/Login_page.dart';
+import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,21 +38,8 @@ class _MyAppState extends State<MyApp> {
       theme: themeMode == ThemeMode.dark
           ? MyAppThemeConfig.dark().getTheme(locale.languageCode)
           : MyAppThemeConfig.light().getTheme(locale.languageCode),
-      home: Login_page(toggleThemeMode: () {
-        setState(() {
-          if (themeMode == ThemeMode.dark) {
-            themeMode = ThemeMode.light;
-          } else {
-            themeMode = ThemeMode.dark;
-          }
-        });
-      }, selectedLanguageChanged: (Language newSelectedLanguageByUser) {
-        setState(() {
-          locale = newSelectedLanguageByUser == Language.en
-              ? Locale('en','1')
-              : Locale('fa','98');
-        });
-      }),
+      home: SplashScreen()
+      //all details of login_page has passed to splash screen navigator
     );
   }
 }
