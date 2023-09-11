@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
@@ -85,6 +86,7 @@ class _AuthState extends State<Auth> {
     });
     print(language);
     print(locale);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SplashScreen()));//it goes to splash screen and then it comes back with selected langauge
   }
 
   @override
