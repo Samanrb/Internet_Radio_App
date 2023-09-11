@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
+import 'package:flutter_internet_app/change_account.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_internet_app/splash_screen.dart';
@@ -71,7 +72,6 @@ class _AuthState extends State<Auth> {
 
   void ChangeLanguage() {
     debugPrint("change language");
-    print(language);
     print(locale);
     setState(() {
       if (locale.languageCode == 'en') {
@@ -82,7 +82,6 @@ class _AuthState extends State<Auth> {
         locale = const Locale('en');
       }
     });
-    print(language);
     print(locale);
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
@@ -93,6 +92,7 @@ class _AuthState extends State<Auth> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
+      resizeToAvoidBottomInset: true,//for keyboard
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -120,7 +120,7 @@ class _AuthState extends State<Auth> {
             ),
             const Center(
               child: Padding(
-                padding: EdgeInsets.all(40.0),
+                padding: EdgeInsets.all(10.0),
                 child: SizedBox(
                     width: 100,
                     height: 100,
@@ -209,6 +209,7 @@ class _AuthState extends State<Auth> {
                           color: Colors.white,
                         ),
                         child: SingleChildScrollView(
+                          //reverse: true,
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                             child: selectedTab == SelectedTab.login
@@ -272,7 +273,7 @@ class __login_pageState extends State<_login_page> {
           //email
           autocorrect: false,
           controller: _loginEmail,
-          decoration: InputDecoration(label: Text(localization.email)),
+          decoration: InputDecoration(label: Text(localization.email),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
         ),
         PasswordTextField(
           textController: _loginPass,
@@ -283,12 +284,25 @@ class __login_pageState extends State<_login_page> {
         ),
         ElevatedButton(
           onPressed: () {
+
             debugPrint(
                 "Username:  ${_loginEmail.text}\nPass:  ${_loginPass.text}");
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => Show_inputs.withoutName(_loginEmail.text,_loginPass.text)),
-            // );
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => (change_account(toggleThemeMode: () {
+                      if (themeMode == ThemeMode.dark) {
+                        themeMode = ThemeMode.light;
+                      } else {
+                        themeMode = ThemeMode.dark;
+                      }
+                    }, selectedLanguageChanged:
+                        (Language newSelectedLanguageByUser) {
+                      locale = newSelectedLanguageByUser == Language.en
+                          ? const Locale('en', '1')
+                          : const Locale('fa', '98');
+                    }))),
+          );
           },
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
@@ -397,13 +411,13 @@ class _signup_pageState extends State<_signup_page> {
         //Fullname
         autocorrect: false,
         controller: _signupName,
-        decoration: InputDecoration(label: Text(localization.fullname)),
+        decoration: InputDecoration(label: Text(localization.fullname),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
       ),
       TextField(
         //email
         autocorrect: false,
         controller: _signupEmail,
-        decoration: InputDecoration(label: Text(localization.email)),
+        decoration: InputDecoration(label: Text(localization.email,),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
       ),
       PasswordTextField(
         textController: _signupPass,

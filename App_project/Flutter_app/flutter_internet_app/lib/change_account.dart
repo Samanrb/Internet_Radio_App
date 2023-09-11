@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_internet_app/Login_page.dart';
 import 'package:flutter_internet_app/change_password.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,6 +105,7 @@ class _change_account_pageState extends State<change_account_page> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -412,9 +414,23 @@ class account_details_formState extends State<account_details_form> {
       ElevatedButton(
         //logout
         onPressed: () {
-          //todo send new information to database
-          debugPrint(
-              "Fullname:  ${_signupName.text}\nUsername:  ${_signupEmail.text}\nPass:  ${_signupPass.text}");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => (Login_page(toggleThemeMode: () {
+                      if (themeMode == ThemeMode.dark) {
+                        themeMode = ThemeMode.light;
+                      } else {
+                        themeMode = ThemeMode.dark;
+                      }
+                    }, selectedLanguageChanged:
+                        (Language newSelectedLanguageByUser) {
+                      locale = newSelectedLanguageByUser == Language.en
+                          ? const Locale('en', '1')
+                          : const Locale('fa', '98');
+                    }))),
+          );
+          
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.red[300]),
