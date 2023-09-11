@@ -100,11 +100,11 @@ class _change_password_pageState extends State<change_password_page> {
             ),
             Expanded(
                 child: Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(32),
                       topRight: Radius.circular(32)),
-                  color: Color.fromARGB(255, 35, 53, 185)),
+                  color: MyAppColors().primaryColor),
               child: Column(children: [
                 SizedBox(
                   height: 60,
@@ -232,7 +232,7 @@ class account_details_formState extends State<account_details_form> {
             : null,
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(255, 35, 53, 185)),
+                MyAppColors().primaryColor),
             minimumSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 60),
             ),

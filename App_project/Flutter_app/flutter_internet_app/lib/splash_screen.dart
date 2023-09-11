@@ -39,23 +39,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
-          Positioned.fill(
+          const Positioned.fill(
               child: Image(image: AssetImage('assets/images/splash_screen.jpg'))),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(
+                const Image(
                   width: 250,
                   height: 300,
                   image: AssetImage('assets/images/logo.jpg')),
                   Text("INTERNET RADIO APP",
-                  style: TextStyle(color: Colors.blue,fontSize: 20,fontWeight: FontWeight.bold),)
+                  style: TextStyle(color: MyAppColors().primaryColor,fontSize: 20,fontWeight: FontWeight.bold),)
               ],
             ),
           )

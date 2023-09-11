@@ -143,11 +143,11 @@ class _change_account_pageState extends State<change_account_page> {
             ),
             Expanded(
                 child: Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration:  BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(32),
                       topRight: Radius.circular(32)),
-                  color: Color.fromARGB(255, 35, 53, 185)),
+                  color: MyAppColors().primaryColor),
               child: Column(children: [
                 SizedBox(
                   height: 60,
@@ -397,7 +397,7 @@ class account_details_formState extends State<account_details_form> {
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(255, 35, 53, 185)),
+                MyAppColors().primaryColor),
             minimumSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 60),
             ),
@@ -433,7 +433,7 @@ class account_details_formState extends State<account_details_form> {
           
         },
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red[300]),
+            backgroundColor: MaterialStateProperty.all(MyAppColors().alarmColor),
             minimumSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 60),
             ),

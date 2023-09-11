@@ -129,11 +129,11 @@ class _AuthState extends State<Auth> {
             ),
             Expanded(
                 child: Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(32),
                       topRight: Radius.circular(32)),
-                  color: Color.fromARGB(255, 35, 53, 185)),
+                  color: MyAppColors().primaryColor),
               child: Column(children: [
                 SizedBox(
                   height: 60,
@@ -159,7 +159,7 @@ class _AuthState extends State<Auth> {
                                 fontWeight: FontWeight.normal,
                                 color: selectedTab == SelectedTab.login
                                     ? Colors.white
-                                    : Colors.grey,
+                                    : MyAppColors().grayColor,
                               ),
                             ),
                           );
@@ -184,7 +184,7 @@ class _AuthState extends State<Auth> {
                                 fontWeight: FontWeight.normal,
                                 color: selectedTab == SelectedTab.signup
                                     ? Colors.white
-                                    : Colors.grey,
+                                    : MyAppColors().grayColor,
                               ),
                             ),
                           );
@@ -306,7 +306,7 @@ class __login_pageState extends State<_login_page> {
           },
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 35, 53, 185)),
+                  MyAppColors().primaryColor),
               minimumSize: MaterialStateProperty.all(
                 Size(MediaQuery.of(context).size.width, 60),
               ),
@@ -440,7 +440,7 @@ class _signup_pageState extends State<_signup_page> {
             : null,
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(255, 35, 53, 185)),
+                MyAppColors().primaryColor),
             minimumSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 60),
             ),
@@ -546,7 +546,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 onFail: () {
                   widget.onPasswordValidation(false);
                 },
-                successColor: const Color.fromARGB(255, 35, 53, 185),
+                successColor: MyAppColors().primaryColor,
               );
             } else {
               return const SizedBox(
