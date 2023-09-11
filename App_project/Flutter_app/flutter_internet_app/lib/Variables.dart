@@ -3,6 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class MyAppColors{
+  final Color primaryColor = Color.fromARGB(255, 35, 53, 185);
+  final Color? grayColor = Colors.grey[700];
+  final Color? alarmColor = Colors.red[300];
+}
+
 ThemeMode themeMode = ThemeMode.dark;
 Locale locale = Locale('en');
 
@@ -106,3 +112,53 @@ class MyAppThemeConfig {
           fontFamily: faPrimaryFontFamily),
       button: TextStyle(fontFamily: faPrimaryFontFamily));
 }
+
+
+String getMonthName(String formattedDate) {
+  List<String> selectedDate = formattedDate.split('-');
+  String tempMonth = "";
+switch (selectedDate[1]) {
+  case '01':
+    tempMonth = "Jan";
+    break;
+  case '02':
+    tempMonth = "Feb";
+    break;
+  case '03':
+    tempMonth = "Mar";
+    break;
+  case '04':
+    tempMonth = "Apr";
+    break;
+  case '05':
+    tempMonth = "May";
+    break;
+  case '06':
+    tempMonth = "Jun";
+    break;
+  case '07':
+    tempMonth = "Jul";
+    break;
+  case '08':
+    tempMonth = "Aug";
+    break;
+  case '09':
+    tempMonth = "Sep";
+    break;
+  case '10':
+    tempMonth = "Oct";
+    break;
+  case '11':
+    tempMonth = "Nov";
+    break;
+  case '12':
+    tempMonth = "Dec";
+    break;
+  default:
+    tempMonth = "err";
+    break;
+}
+  String selectedDateWithMonth = "${selectedDate[0]} $tempMonth ${selectedDate[2]}";
+  return selectedDateWithMonth;
+}
+
