@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_const, deprecated_member_use, camel_case_types, unused_element, no_leading_underscores_for_local_identifiers, unused_local_variable, file_names, prefer_final_fields, unused_field, unused_import, prefer_const_literals_to_create_immutables, unnecessary_import, non_constant_identifier_names, avoid_print, prefer_const_constructors
+// ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_internet_app/change_password.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
 void main() {
   runApp(change_account(toggleThemeMode: () {
@@ -21,14 +19,14 @@ void main() {
     }
   }, selectedLanguageChanged: (Language newSelectedLanguageByUser) {
     locale = newSelectedLanguageByUser == Language.en
-        ? Locale('en', '1')
-        : Locale('fa', '98');
+        ? const Locale('en', '1')
+        : const Locale('fa', '98');
   }));
 }
 
 class change_account extends StatefulWidget {
   final Function() toggleThemeMode;
-  final Function(Language _language) selectedLanguageChanged;
+  final Function(Language language) selectedLanguageChanged;
   const change_account(
       {Key? key,
       required this.toggleThemeMode,
@@ -40,14 +38,13 @@ class change_account extends StatefulWidget {
 }
 
 class _change_accountState extends State<change_account> {
-  Language _language = Language.en;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       locale: locale,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -90,17 +87,17 @@ class _change_account_pageState extends State<change_account_page> {
     setState(() {
       if (locale.languageCode == 'en') {
         language == Language.fa;
-        locale = Locale('fa');
+        locale = const Locale('fa');
       } else {
         language == Language.en;
-        locale = Locale('en');
+        locale = const Locale('en');
       }
     });
     print(language);
     print(locale);
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            SplashScreen())); //it goes to splash screen and then it comes back with selected langauge
+            const SplashScreen())); //it goes to splash screen and then it comes back with selected langauge
   }
 
   @override
@@ -157,7 +154,7 @@ class _change_account_pageState extends State<change_account_page> {
                     children: [
                       Text(
                         localization.simpleFullname,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
@@ -174,9 +171,9 @@ class _change_account_pageState extends State<change_account_page> {
                       ),
                       color: Colors.white,
                     ),
-                    child: SingleChildScrollView(
+                    child: const SingleChildScrollView(
                       child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                           child: account_details_form()),
                     ),
                   ),
@@ -228,7 +225,7 @@ class account_details_formState extends State<account_details_form> {
             Icons.alternate_email,
             color: MyAppColors().grayColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -251,13 +248,13 @@ class account_details_formState extends State<account_details_form> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          suffixIcon: Icon(
+          suffixIcon: const Icon(
             Icons.lock_outline_rounded,
             size: 30,
           ),
           suffixIconColor: MyAppColors().primaryColor,
           hintText: localization.simpleEmail,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w500,
@@ -273,7 +270,7 @@ class account_details_formState extends State<account_details_form> {
             Icons.account_circle_outlined,
             color: MyAppColors().grayColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -296,13 +293,13 @@ class account_details_formState extends State<account_details_form> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          suffixIcon: Icon(
+          suffixIcon: const Icon(
             Icons.lock_open,
             size: 30,
           ),
           suffixIconColor: MyAppColors().primaryColor,
           hintText: localization.simpleFullname,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w500,
@@ -318,7 +315,7 @@ class account_details_formState extends State<account_details_form> {
             Icons.date_range_outlined,
             color: MyAppColors().grayColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -333,7 +330,7 @@ class account_details_formState extends State<account_details_form> {
       const SizedBox(
         height: 10,
       ),
-      Birthday_change(),
+      const Birthday_change(),
       const SizedBox(
         height: 25,
       ),
@@ -352,8 +349,8 @@ class account_details_formState extends State<account_details_form> {
                     }, selectedLanguageChanged:
                         (Language newSelectedLanguageByUser) {
                       locale = newSelectedLanguageByUser == Language.en
-                          ? Locale('en', '1')
-                          : Locale('fa', '98');
+                          ? const Locale('en', '1')
+                          : const Locale('fa', '98');
                     }))),
           );
         },
@@ -371,10 +368,10 @@ class account_details_formState extends State<account_details_form> {
               localization.changePassword,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Icon(
+            const Icon(
               Icons.lock_open,
             ),
           ],
@@ -433,10 +430,10 @@ class account_details_formState extends State<account_details_form> {
               localization.logout,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            Icon(
+            const Icon(
               Icons.logout,
               size: 25,
             ),
@@ -473,12 +470,12 @@ class _Birthday_changeState extends State<Birthday_change> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        suffixIcon: Icon(
+        suffixIcon: const Icon(
           Icons.lock_open,
           size: 30,
         ),
         suffixIconColor: MyAppColors().primaryColor,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Colors.black,
           fontSize: 18,
           fontWeight: FontWeight.w500,
@@ -502,7 +499,7 @@ class _Birthday_changeState extends State<Birthday_change> {
                     MyAppColors().primaryColor, // Header background color
                 colorScheme: ColorScheme.light(
                     primary: MyAppColors().primaryColor), // Active text color
-                buttonTheme: ButtonThemeData(
+                buttonTheme: const ButtonThemeData(
                     textTheme: ButtonTextTheme.primary), // Button text color
               ),
               child: child!,

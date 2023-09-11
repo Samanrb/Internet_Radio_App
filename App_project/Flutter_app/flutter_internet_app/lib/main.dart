@@ -1,11 +1,7 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, deprecated_member_use, prefer_const_literals_to_create_immutables, unused_field, no_leading_underscores_for_local_identifiers, library_private_types_in_public_api, prefer_final_fields, unused_import
-
 import 'package:flutter/material.dart';
-import 'package:flutter_internet_app/Login_page.dart';
 import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_internet_app/Variables.dart';
 
 
@@ -28,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Internet Radio',
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -39,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       theme: themeMode == ThemeMode.dark
           ? MyAppThemeConfig.dark().getTheme(locale.languageCode)
           : MyAppThemeConfig.light().getTheme(locale.languageCode),
-      home: SplashScreen()
+      home: const SplashScreen()
       //all details of login_page has passed to splash screen navigator
     );
   }

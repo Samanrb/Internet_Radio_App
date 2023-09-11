@@ -1,14 +1,11 @@
-// ignore_for_file: unnecessary_const, deprecated_member_use, camel_case_types, unused_element, no_leading_underscores_for_local_identifiers, unused_local_variable, file_names, prefer_final_fields, unused_field, unused_import, prefer_const_literals_to_create_immutables, unnecessary_import, non_constant_identifier_names, avoid_print, prefer_const_constructors
+// ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_internet_app/change_account.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
@@ -21,14 +18,14 @@ void main() {
     }
   }, selectedLanguageChanged: (Language newSelectedLanguageByUser) {
     locale = newSelectedLanguageByUser == Language.en
-        ? Locale('en', '1')
-        : Locale('fa', '98');
+        ? const Locale('en', '1')
+        : const Locale('fa', '98');
   }));
 }
 
 class change_password extends StatefulWidget {
   final Function() toggleThemeMode;
-  final Function(Language _language) selectedLanguageChanged;
+  final Function(Language language) selectedLanguageChanged;
   const change_password(
       {Key? key,
       required this.toggleThemeMode,
@@ -40,14 +37,13 @@ class change_password extends StatefulWidget {
 }
 
 class _change_passwordState extends State<change_password> {
-  Language _language = Language.en;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       locale: locale,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -116,7 +112,7 @@ class _change_password_pageState extends State<change_password_page> {
                     children: [
                       Text(
                         localization.simpleFullname,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
@@ -133,9 +129,9 @@ class _change_password_pageState extends State<change_password_page> {
                       ),
                       color: Colors.white,
                     ),
-                    child: SingleChildScrollView(
+                    child: const SingleChildScrollView(
                       child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                           child: account_details_form()),
                     ),
                   ),
@@ -157,16 +153,12 @@ class account_details_form extends StatefulWidget {
 }
 
 class account_details_formState extends State<account_details_form> {
-  final _signupEmail = TextEditingController();
   final _signupPass = TextEditingController();
-  final _signupName = TextEditingController();
   bool isPasswordOk = false;
 
   @override
   void dispose() {
-    _signupEmail.dispose();
     _signupPass.dispose();
-    _signupName.dispose();
     super.dispose();
   }
 
@@ -190,7 +182,7 @@ class account_details_formState extends State<account_details_form> {
             Icons.change_circle_outlined,
             color: MyAppColors().primaryColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -217,7 +209,7 @@ class account_details_formState extends State<account_details_form> {
             ? () {
               //save new password
                 debugPrint(
-                    "Fullname:  ${_signupName.text}\nUsername:  ${_signupEmail.text}\nPass:  ${_signupPass.text}");
+                    "New Password is : ${_signupPass.text}");
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -231,8 +223,8 @@ class account_details_formState extends State<account_details_form> {
                           }, selectedLanguageChanged:
                                   (Language newSelectedLanguageByUser) {
                             locale = newSelectedLanguageByUser == Language.en
-                                ? Locale('en', '1')
-                                : Locale('fa', '98');
+                                ? const Locale('en', '1')
+                                : const Locale('fa', '98');
                           }))),
                 );
               }
@@ -250,7 +242,7 @@ class account_details_formState extends State<account_details_form> {
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 25,
       ),
       ElevatedButton(
@@ -268,8 +260,8 @@ class account_details_formState extends State<account_details_form> {
                     }, selectedLanguageChanged:
                         (Language newSelectedLanguageByUser) {
                       locale = newSelectedLanguageByUser == Language.en
-                          ? Locale('en', '1')
-                          : Locale('fa', '98');
+                          ? const Locale('en', '1')
+                          : const Locale('fa', '98');
                     }))),
           );
         },

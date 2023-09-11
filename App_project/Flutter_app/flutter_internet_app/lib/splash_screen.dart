@@ -1,6 +1,5 @@
-// ignore_for_file: unused_import, unnecessary_import, prefer_const_constructors
+// //ignore_for_file: unused_import, unnecessary_import, prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_app/Login_page.dart';
 import 'package:flutter_internet_app/Variables.dart';
@@ -29,8 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
       }, selectedLanguageChanged: (Language newSelectedLanguageByUser) {
         setState(() {
           locale = newSelectedLanguageByUser == Language.en
-              ? Locale('en','1')
-              : Locale('fa','98');
+              ? const Locale('en','1')
+              : const Locale('fa','98');
         });
       }),
           ));

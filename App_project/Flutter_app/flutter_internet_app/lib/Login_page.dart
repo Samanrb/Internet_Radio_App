@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_const, deprecated_member_use, camel_case_types, unused_element, no_leading_underscores_for_local_identifiers, unused_local_variable, file_names, prefer_final_fields, unused_field, unused_import, prefer_const_literals_to_create_immutables, unnecessary_import, non_constant_identifier_names, avoid_print, prefer_const_constructors
+// ignore_for_file: file_names, camel_case_types, non_constant_identifier_names, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
@@ -12,7 +11,7 @@ import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
 class Login_page extends StatefulWidget {
   final Function() toggleThemeMode;
-  final Function(Language _language) selectedLanguageChanged;
+  final Function(Language language) selectedLanguageChanged;
   const Login_page(
       {Key? key,
       required this.toggleThemeMode,
@@ -24,14 +23,13 @@ class Login_page extends StatefulWidget {
 }
 
 class _Login_pageState extends State<Login_page> {
-  Language _language = Language.en;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       locale: locale,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -78,17 +76,17 @@ class _AuthState extends State<Auth> {
     setState(() {
       if (locale.languageCode == 'en') {
         language == Language.fa;
-        locale = Locale('fa');
+        locale = const Locale('fa');
       } else {
         language == Language.en;
-        locale = Locale('en');
+        locale = const Locale('en');
       }
     });
     print(language);
     print(locale);
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            SplashScreen())); //it goes to splash screen and then it comes back with selected langauge
+            const SplashScreen())); //it goes to splash screen and then it comes back with selected langauge
   }
 
   @override
@@ -232,7 +230,7 @@ class _AuthState extends State<Auth> {
 }
 
 class _login_page extends StatefulWidget {
-  const _login_page({super.key});
+  const _login_page();
 
   @override
   State<_login_page> createState() => __login_pageState();
@@ -258,14 +256,14 @@ class __login_pageState extends State<_login_page> {
       children: [
         Text(
           localization.welcomeBack,
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 8,
         ),
         Text(
           localization.signInText,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
         ),
         const SizedBox(
           height: 16,
@@ -324,7 +322,7 @@ class __login_pageState extends State<_login_page> {
         Center(
           child: Text(
             localization.signInWith,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
           ),
         ),
         Padding(
@@ -350,7 +348,7 @@ class __login_pageState extends State<_login_page> {
 }
 
 class _signup_page extends StatefulWidget {
-  const _signup_page({super.key});
+  const _signup_page();
 
   @override
   State<_signup_page> createState() => _signup_pageState();
@@ -383,14 +381,14 @@ class _signup_pageState extends State<_signup_page> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         localization.welcomeBack,
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
       ),
       const SizedBox(
         height: 5,
       ),
       Text(
         localization.enterYourInforation,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
       ),
       const SizedBox(
         height: 5,
@@ -445,7 +443,7 @@ class _signup_pageState extends State<_signup_page> {
       Center(
         child: Text(
           localization.signInWith,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
         ),
       ),
       Padding(
@@ -534,16 +532,16 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 onFail: () {
                   widget.onPasswordValidation(false);
                 },
-                successColor: Color.fromARGB(255, 35, 53, 185),
+                successColor: const Color.fromARGB(255, 35, 53, 185),
               );
             } else {
-              return SizedBox(
+              return const SizedBox(
                 height: 1,
               );
             }
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
       ],

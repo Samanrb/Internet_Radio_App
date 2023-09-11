@@ -1,22 +1,22 @@
-// ignore_for_file: unused_field, file_names, unused_element, prefer_const_constructors, deprecated_member_use
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAppColors{
-  final Color primaryColor = Color.fromARGB(255, 35, 53, 185);
+  final Color primaryColor = const Color.fromARGB(255, 35, 53, 185);
   final Color? grayColor = Colors.grey[700];
   final Color? alarmColor = Colors.red[300];
 }
 
 ThemeMode themeMode = ThemeMode.dark;
-Locale locale = Locale('en');
+Locale locale = const Locale('en');
 
 selectedLanguageChanged() {
-  if (locale == Locale('en')) {
-    locale = Locale('fa');
+  if (locale == const Locale('en')) {
+    locale = const Locale('fa');
   } else {
-    locale = Locale('en');
+    locale = const Locale('en');
   }
 }
 
@@ -27,7 +27,7 @@ enum Language {
 
 class MyAppThemeConfig {
   static const String faPrimaryFontFamily = 'IranYekan';
-  final Color primaryColor = Color.fromARGB(255, 35, 53, 185);
+  final Color primaryColor = const Color.fromARGB(255, 35, 53, 185);
   final Color primaryTextColor;
   final Color secondaryTextColor;
   final Color surfaceColor;
@@ -38,17 +38,17 @@ class MyAppThemeConfig {
   MyAppThemeConfig.dark()
       : primaryTextColor = Colors.white,
         secondaryTextColor = Colors.white70,
-        surfaceColor = Color(0x0dffffff),
-        backgroundColor = Color.fromARGB(255, 30, 30, 30),
+        surfaceColor = const Color(0x0dffffff),
+        backgroundColor = const Color.fromARGB(255, 30, 30, 30),
         appBarColor = Colors.black,
         brightness = Brightness.dark;
 
   MyAppThemeConfig.light()
       : primaryTextColor = Colors.grey.shade900,
         secondaryTextColor = Colors.grey.shade900.withOpacity(0.8),
-        surfaceColor = Color(0x0d000000),
+        surfaceColor = const Color(0x0d000000),
         backgroundColor = Colors.white,
-        appBarColor = Color.fromARGB(255, 235, 235, 235),
+        appBarColor = const Color.fromARGB(255, 235, 235, 235),
         brightness = Brightness.light;
 
   ThemeData getTheme(String languageCode) {
@@ -68,7 +68,7 @@ class MyAppThemeConfig {
           backgroundColor: appBarColor,
           foregroundColor: primaryTextColor),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide.none),
@@ -99,7 +99,7 @@ class MyAppThemeConfig {
           height: 1.5,
           color: secondaryTextColor,
           fontFamily: faPrimaryFontFamily),
-      caption: TextStyle(fontFamily: faPrimaryFontFamily),
+      caption: const TextStyle(fontFamily: faPrimaryFontFamily),
       headline6: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class MyAppThemeConfig {
           fontWeight: FontWeight.bold,
           color: primaryTextColor,
           fontFamily: faPrimaryFontFamily),
-      button: TextStyle(fontFamily: faPrimaryFontFamily));
+      button: const TextStyle(fontFamily: faPrimaryFontFamily));
 }
 
 
