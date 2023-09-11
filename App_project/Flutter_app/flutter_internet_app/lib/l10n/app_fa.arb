@@ -13,5 +13,12 @@
        "fullname": "نام و نام خانوادگی",
        "enterYourInforation": "لطفا مشخصات خود را وارد کنید",
        "simpleEmail": "amirsaman2003@yahoo.com",
-       "simpleFullname": "Saman RostamBeigi"
+       "simpleFullname": "Saman RostamBeigi",
+       "birth": "تاریخ تولد",
+       "changePassword": "تغییر رمز عبور",
+       "saveChanges": "ذخیره تغییرات",
+       "logout": "خروج از حساب کاربری",
+       "enterDate": "وارد کردن تاریخ",
+       "insertNewPass": "رمز عبور جدید را وارد کنید",
+       "cancel": "برگشت"
 }

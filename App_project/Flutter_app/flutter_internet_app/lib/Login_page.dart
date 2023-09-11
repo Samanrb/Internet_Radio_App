@@ -86,7 +86,9 @@ class _AuthState extends State<Auth> {
     });
     print(language);
     print(locale);
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SplashScreen()));//it goes to splash screen and then it comes back with selected langauge
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) =>
+            SplashScreen())); //it goes to splash screen and then it comes back with selected langauge
   }
 
   @override
@@ -378,9 +380,7 @@ class _signup_pageState extends State<_signup_page> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         localization.welcomeBack,
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -495,7 +495,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           enableSuggestions: false,
           autocorrect: false,
           decoration: InputDecoration(
-            label: Text(localization.password),
+            label: Text(
+              localization.password,
+              style: TextStyle(color: MyAppColors().primaryColor),
+            ),
             suffix: InkWell(
               onTap: () {
                 setState(() {
@@ -526,11 +529,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 width: 400,
                 height: 150,
                 onSuccess: () {
-                  print(selectedTab);
-                  print("ok");
                   widget.onPasswordValidation(true);
                 },
-                onFail: null,
+                onFail: () {
+                  widget.onPasswordValidation(false);
+                },
                 successColor: Color.fromARGB(255, 35, 53, 185),
               );
             } else {

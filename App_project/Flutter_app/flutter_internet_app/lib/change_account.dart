@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_internet_app/change_password.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
@@ -132,8 +133,9 @@ class _change_account_pageState extends State<change_account_page> {
               ],
             ),
             const Center(
+              //logo
               child: Padding(
-                padding: EdgeInsets.all(40.0),
+                padding: EdgeInsets.all(10.0),
                 child: SizedBox(
                     width: 100,
                     height: 100,
@@ -154,7 +156,7 @@ class _change_account_pageState extends State<change_account_page> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Saman Rostam Beigi",
+                        localization.simpleFullname,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -230,7 +232,7 @@ class account_details_formState extends State<account_details_form> {
             width: 5,
           ),
           Text(
-            "Email",
+            localization.email,
             style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
@@ -286,7 +288,6 @@ class account_details_formState extends State<account_details_form> {
       const SizedBox(
         height: 10,
       ),
-
       TextFormField(
         autocorrect: false,
         showCursor: true,
@@ -321,7 +322,7 @@ class account_details_formState extends State<account_details_form> {
             width: 5,
           ),
           Text(
-            "Birth",
+            localization.birth,
             style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
@@ -334,16 +335,56 @@ class account_details_formState extends State<account_details_form> {
       ),
       Birthday_change(),
       const SizedBox(
-        height: 10,
+        height: 25,
       ),
-      Text(
-        "Change Password",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+      ElevatedButton(
+        onPressed: () {
+          //Change Password
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => (change_password(toggleThemeMode: () {
+                      if (themeMode == ThemeMode.dark) {
+                        themeMode = ThemeMode.light;
+                      } else {
+                        themeMode = ThemeMode.dark;
+                      }
+                    }, selectedLanguageChanged:
+                        (Language newSelectedLanguageByUser) {
+                      locale = newSelectedLanguageByUser == Language.en
+                          ? Locale('en', '1')
+                          : Locale('fa', '98');
+                    }))),
+          );
+        },
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.black),
+            minimumSize: MaterialStateProperty.all(
+              Size(MediaQuery.of(context).size.width, 60),
+            ),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              localization.changePassword,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Icon(
+              Icons.lock_open,
+            ),
+          ],
+        ),
       ),
       const SizedBox(
         height: 25,
       ),
       ElevatedButton(
+        //save changes
         onPressed: () {
           debugPrint(
               //todo send new information to database
@@ -364,7 +405,7 @@ class account_details_formState extends State<account_details_form> {
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)))),
         child: Text(
-          "Save Changes",
+          localization.saveChanges,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
@@ -389,7 +430,7 @@ class account_details_formState extends State<account_details_form> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Logout",
+              localization.logout,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -424,6 +465,7 @@ class _Birthday_changeState extends State<Birthday_change> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Center(
         child: TextField(
       controller: dateInput,
@@ -441,7 +483,7 @@ class _Birthday_changeState extends State<Birthday_change> {
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
-        hintText: "Enter Date",
+        hintText: localization.enterDate,
       ),
 
       readOnly: true,

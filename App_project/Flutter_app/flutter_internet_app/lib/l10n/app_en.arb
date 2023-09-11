@@ -13,5 +13,12 @@
        "fullname": "Fullname",
        "enterYourInforation": "Please enter your inforation",
        "simpleEmail": "amirsaman2003@yahoo.com",
-       "simpleFullname": "Saman RostamBeigi"
+       "simpleFullname": "Saman RostamBeigi",
+       "birth": "Birth",
+       "changePassword": "Change Password",
+       "saveChanges": "Save Changes",
+       "logout": "Logout",
+       "enterDate": "Enter Date",
+       "insertNewPass": "Insert your new password",
+       "cancel": "Cancel"
 }
