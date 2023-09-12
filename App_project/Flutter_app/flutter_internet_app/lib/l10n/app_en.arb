@@ -20,5 +20,9 @@
        "logout": "Logout",
        "enterDate": "Enter Date",
        "insertNewPass": "Insert your new password",
-       "cancel": "Cancel"
+       "cancel": "Cancel",
+       "home": "Home",
+       "profile": "Profile",
+       "search": "Search",
+       "upload": "Upload"
 }

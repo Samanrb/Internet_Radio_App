@@ -1,5 +1,6 @@
-// ignore_for_file: file_names, deprecated_member_use
+// ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names
 
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +12,8 @@ class MyAppColors{
 
 ThemeMode themeMode = ThemeMode.dark;
 Locale locale = const Locale('en');
+var nowStatus = NotchBottomBarController(index: 1);
+
 
 selectedLanguageChanged() {
   if (locale == const Locale('en')) {

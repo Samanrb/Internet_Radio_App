@@ -1,8 +1,10 @@
-// ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print
+// ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_print, unused_import, unused_field
 
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_app/Login_page.dart';
 import 'package:flutter_internet_app/change_password.dart';
+import 'package:flutter_internet_app/home_page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
@@ -107,6 +109,7 @@ class _change_account_pageState extends State<change_account_page> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
+      bottomNavigationBar: const MyButtonBar(),
       body: SafeArea(
         child: Column(
           children: [

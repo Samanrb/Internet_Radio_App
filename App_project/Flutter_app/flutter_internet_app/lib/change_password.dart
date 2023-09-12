@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_internet_app/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
@@ -84,6 +85,7 @@ class _change_password_pageState extends State<change_password_page> {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      bottomNavigationBar: const MyButtonBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
