@@ -71,7 +71,8 @@ class MyAppThemeConfig {
           backgroundColor: appBarColor,
           foregroundColor: primaryTextColor),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+        labelStyle:
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide.none),
@@ -116,52 +117,62 @@ class MyAppThemeConfig {
       button: const TextStyle(fontFamily: faPrimaryFontFamily));
 }
 
-
 String getMonthName(String formattedDate) {
   List<String> selectedDate = formattedDate.split('-');
   String tempMonth = "";
-switch (selectedDate[1]) {
-  case '01':
-    tempMonth = "Jan";
-    break;
-  case '02':
-    tempMonth = "Feb";
-    break;
-  case '03':
-    tempMonth = "Mar";
-    break;
-  case '04':
-    tempMonth = "Apr";
-    break;
-  case '05':
-    tempMonth = "May";
-    break;
-  case '06':
-    tempMonth = "Jun";
-    break;
-  case '07':
-    tempMonth = "Jul";
-    break;
-  case '08':
-    tempMonth = "Aug";
-    break;
-  case '09':
-    tempMonth = "Sep";
-    break;
-  case '10':
-    tempMonth = "Oct";
-    break;
-  case '11':
-    tempMonth = "Nov";
-    break;
-  case '12':
-    tempMonth = "Dec";
-    break;
-  default:
-    tempMonth = "err";
-    break;
-}
-  String selectedDateWithMonth = "${selectedDate[0]} $tempMonth ${selectedDate[2]}";
+  switch (selectedDate[1]) {
+    case '01':
+      tempMonth = "Jan";
+      break;
+    case '02':
+      tempMonth = "Feb";
+      break;
+    case '03':
+      tempMonth = "Mar";
+      break;
+    case '04':
+      tempMonth = "Apr";
+      break;
+    case '05':
+      tempMonth = "May";
+      break;
+    case '06':
+      tempMonth = "Jun";
+      break;
+    case '07':
+      tempMonth = "Jul";
+      break;
+    case '08':
+      tempMonth = "Aug";
+      break;
+    case '09':
+      tempMonth = "Sep";
+      break;
+    case '10':
+      tempMonth = "Oct";
+      break;
+    case '11':
+      tempMonth = "Nov";
+      break;
+    case '12':
+      tempMonth = "Dec";
+      break;
+    default:
+      tempMonth = "err";
+      break;
+  }
+  String selectedDateWithMonth =
+      "${selectedDate[0]} $tempMonth ${selectedDate[2]}";
   return selectedDateWithMonth;
 }
 
+class Musics {
+  final String title;
+  final String artist;
+  final String filePathPath;
+  Musics(this.title, this.artist, this.filePathPath);
+}
+
+List<Musics> musicList = List.generate(10, (index) {
+  return Musics("Song $index", "Artist $index", "path: $index");
+});

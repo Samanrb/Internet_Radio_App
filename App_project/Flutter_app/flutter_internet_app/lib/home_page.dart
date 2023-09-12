@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, unused_import, unused_local_variable, prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, no_leading_underscores_for_local_identifiers, unused_element
 
+import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
@@ -110,10 +111,78 @@ class _HomeScreen_pageState extends State<HomeScreen_page> {
                     child: Image(image: AssetImage('assets/images/logo.jpg'))),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            //Music_List()
           ],
         ),
       ),
       bottomNavigationBar: MyBottonBar(localization),
+    );
+  }
+}
+
+class Music_List extends StatelessWidget {
+  const Music_List({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: musicList.length,
+      itemBuilder: (context, index) {
+        final music = musicList[index];
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SizedBox(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(70),
+                  child: Image(
+                    image: AssetImage('assets/images/temp_axs.jpg'),
+                    height: 60,
+                    width: 60,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      music.title,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(music.artist),
+                  ],
+                ),
+                Expanded(child: SizedBox()),
+                IconButton(
+                  icon: Icon(
+                    Icons.play_circle,
+                    size: 35,
+                    color: MyAppColors().primaryColor,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    size: 35,
+                    color: MyAppColors().primaryColor,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
