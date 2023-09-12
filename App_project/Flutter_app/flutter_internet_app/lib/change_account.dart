@@ -3,6 +3,7 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_app/Login_page.dart';
+import 'package:flutter_internet_app/bottomBar.dart';
 import 'package:flutter_internet_app/change_password.dart';
 import 'package:flutter_internet_app/home_page.dart';
 import 'package:intl/intl.dart';
@@ -85,7 +86,6 @@ class _change_account_pageState extends State<change_account_page> {
 
   void ChangeLanguage() {
     debugPrint("change language");
-    print(language);
     print(locale);
     setState(() {
       if (locale.languageCode == 'en') {
@@ -96,7 +96,6 @@ class _change_account_pageState extends State<change_account_page> {
         locale = const Locale('en');
       }
     });
-    print(language);
     print(locale);
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
@@ -109,7 +108,7 @@ class _change_account_pageState extends State<change_account_page> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      bottomNavigationBar: const MyButtonBar(),
+      bottomNavigationBar: MyBottonBar(localization),
       body: SafeArea(
         child: Column(
           children: [

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_internet_app/Variables.dart';
-import 'package:flutter_internet_app/change_account.dart';
+import 'package:flutter_internet_app/home_page.dart';
 import 'package:flutter_internet_app/cubit/selected_tab_cubit_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_internet_app/splash_screen.dart';
@@ -24,7 +24,7 @@ class Login_page extends StatefulWidget {
 }
 
 class _Login_pageState extends State<Login_page> {
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -92,7 +92,7 @@ class _AuthState extends State<Auth> {
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
-      resizeToAvoidBottomInset: true,//for keyboard
+      resizeToAvoidBottomInset: true, //for keyboard
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -273,7 +273,9 @@ class __login_pageState extends State<_login_page> {
           //email
           autocorrect: false,
           controller: _loginEmail,
-          decoration: InputDecoration(label: Text(localization.email),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
+          decoration: InputDecoration(
+              label: Text(localization.email),
+              labelStyle: TextStyle(color: MyAppColors().primaryColor)),
         ),
         PasswordTextField(
           textController: _loginPass,
@@ -284,29 +286,28 @@ class __login_pageState extends State<_login_page> {
         ),
         ElevatedButton(
           onPressed: () {
-
             debugPrint(
                 "Username:  ${_loginEmail.text}\nPass:  ${_loginPass.text}");
-           Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => (change_account(toggleThemeMode: () {
-                      if (themeMode == ThemeMode.dark) {
-                        themeMode = ThemeMode.light;
-                      } else {
-                        themeMode = ThemeMode.dark;
-                      }
-                    }, selectedLanguageChanged:
-                        (Language newSelectedLanguageByUser) {
-                      locale = newSelectedLanguageByUser == Language.en
-                          ? const Locale('en', '1')
-                          : const Locale('fa', '98');
-                    }))),
-          );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => (HomeScreen(toggleThemeMode: () {
+                        if (themeMode == ThemeMode.dark) {
+                          themeMode = ThemeMode.light;
+                        } else {
+                          themeMode = ThemeMode.dark;
+                        }
+                      }, selectedLanguageChanged:
+                          (Language newSelectedLanguageByUser) {
+                        locale = newSelectedLanguageByUser == Language.en
+                            ? const Locale('en', '1')
+                            : const Locale('fa', '98');
+                      }))),
+            );
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  MyAppColors().primaryColor),
+              backgroundColor:
+                  MaterialStateProperty.all(MyAppColors().primaryColor),
               minimumSize: MaterialStateProperty.all(
                 Size(MediaQuery.of(context).size.width, 60),
               ),
@@ -411,13 +412,19 @@ class _signup_pageState extends State<_signup_page> {
         //Fullname
         autocorrect: false,
         controller: _signupName,
-        decoration: InputDecoration(label: Text(localization.fullname),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
+        decoration: InputDecoration(
+            label: Text(localization.fullname),
+            labelStyle: TextStyle(color: MyAppColors().primaryColor)),
       ),
       TextField(
         //email
         autocorrect: false,
         controller: _signupEmail,
-        decoration: InputDecoration(label: Text(localization.email,),labelStyle: TextStyle(color: MyAppColors().primaryColor)),
+        decoration: InputDecoration(
+            label: Text(
+              localization.email,
+            ),
+            labelStyle: TextStyle(color: MyAppColors().primaryColor)),
       ),
       PasswordTextField(
         textController: _signupPass,
@@ -430,17 +437,27 @@ class _signup_pageState extends State<_signup_page> {
             ? () {
                 debugPrint(
                     "Fullname:  ${_signupName.text}\nUsername:  ${_signupEmail.text}\nPass:  ${_signupPass.text}");
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => Show_inputs(
-                //           _signupEmail.text, _signupPass.text, _signupName.text)),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => (HomeScreen(toggleThemeMode: () {
+                            if (themeMode == ThemeMode.dark) {
+                              themeMode = ThemeMode.light;
+                            } else {
+                              themeMode = ThemeMode.dark;
+                            }
+                          }, selectedLanguageChanged:
+                              (Language newSelectedLanguageByUser) {
+                            locale = newSelectedLanguageByUser == Language.en
+                                ? const Locale('en', '1')
+                                : const Locale('fa', '98');
+                          }))),
+                );
               }
             : null,
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
-                MyAppColors().primaryColor),
+            backgroundColor:
+                MaterialStateProperty.all(MyAppColors().primaryColor),
             minimumSize: MaterialStateProperty.all(
               Size(MediaQuery.of(context).size.width, 60),
             ),
