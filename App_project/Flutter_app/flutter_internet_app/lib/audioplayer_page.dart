@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unused_import, unused_local_variable, prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, no_leading_underscores_for_local_identifiers, unused_element, non_constant_identifier_names
+// ignore_for_file: camel_case_types, unused_import, unused_local_variable, prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, no_leading_underscores_for_local_identifiers, unused_element, non_constant_identifier_names, must_be_immutable
 
 import 'dart:ffi';
 import 'dart:io';
@@ -14,7 +14,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_internet_app/splash_screen.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:audioplayers/audioplayers.dart';
-
 
 void main() {
   runApp(AudioPlayers(toggleThemeMode: () {
@@ -85,12 +84,10 @@ class AudioPlayer_page extends StatefulWidget {
 }
 
 class _AudioPlayer_pageState extends State<AudioPlayer_page> {
-
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    
     return Scaffold(
       resizeToAvoidBottomInset: true, //for keyboard
       backgroundColor: Colors.white,
@@ -106,11 +103,27 @@ class _AudioPlayer_pageState extends State<AudioPlayer_page> {
                     child: Image(image: AssetImage('assets/images/logo.jpg'))),
               ),
             ),
-            SizedBox(
-              height: 20,
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(200),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width - 40,
+                      width: MediaQuery.of(context).size.width - 40,
+                      child: Image(
+                        image: AssetImage('assets/images/temp_axs.jpg'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             AudioPlayerScreen(),
-            
+            SizedBox(
+              height: 80,
+            )
           ],
         ),
       ),
@@ -119,46 +132,137 @@ class _AudioPlayer_pageState extends State<AudioPlayer_page> {
   }
 }
 
-
-class AudioPlayerScreen extends StatelessWidget {
+class AudioPlayerScreen extends StatefulWidget {
   const AudioPlayerScreen({super.key});
+
+  @override
+  State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
+}
+
+class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
+  bool isPlaying = true;
+  bool firstTimePlayed = false;
+
+  void changePlayingState(bool newState) {
+    setState(() {
+      isPlaying = !isPlaying;
+    });
+  }
+
+  void changeFirstPlayed() {
+    setState(() {
+      firstTimePlayed = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(MyAppColors().primaryColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+              //skip back 15
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(32.5),
+                color: MyAppColors().primaryColor,
               ),
-              onPressed: () {
-                AudioPlayerManager.playAudioFromAsset('audio/temp_song.mp3');
-              },
-              child: Text('Play Audio'),
-            ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(MyAppColors().primaryColor),
+              child: Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      debugPrint("isPlaying is : $isPlaying");
+                      AudioPlayerManager.skipBackward();
+                    },
+                    icon: Icon(
+                      Icons.skip_previous,
+                      color: Colors.white,
+                      size: 45,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      height: 20,
+                      width: 20,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(32.5),
+                          color: Colors.white,
+                        ),
+                        child: Center(child: Text("15"))),
+                  )
+                ],
+              )),
+          Container(
+              //play and pause
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(32.5),
+                color: MyAppColors().primaryColor,
               ),
-              onPressed: () {
-                AudioPlayerManager.pauseAudio();
-              },
-              child: Text('Pause Audio'),
-            ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(MyAppColors().primaryColor),
+              child: IconButton(
+                onPressed: () {
+                  changePlayingState(true);
+                  debugPrint("isPlaying is : $isPlaying");
+                  if (isPlaying || firstTimePlayed) {
+                    AudioPlayerManager.pauseAudio();
+                  } else {
+                    AudioPlayerManager.playAudioFromAsset(
+                        'audio/temp_song.mp3');
+                  }
+                },
+                icon: Icon(
+                  isPlaying || firstTimePlayed ? Icons.play_arrow : Icons.pause,
+                  color: Colors.white,
+                  size: 45,
+                ),
+              )),
+          Container(
+              //stop
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(32.5),
+                color: MyAppColors().primaryColor,
               ),
-              onPressed: () {
-                AudioPlayerManager.stopAudio();
-              },
-              child: Text('Stop Audio'),
-            ),
-          ],
-        ),
-      
+              child: IconButton(
+                onPressed: () {
+                  changePlayingState(false);
+                  changeFirstPlayed();
+                  debugPrint("isPlaying is : $isPlaying");
+                  AudioPlayerManager.stopAudio();
+                },
+                icon: Icon(
+                  Icons.stop,
+                  color: Colors.white,
+                  size: 45,
+                ),
+              )),
+          Container(
+              //skip15
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(32.5),
+                color: MyAppColors().primaryColor,
+              ),
+              child: IconButton(
+                onPressed: () {
+                  debugPrint("isPlaying is : $isPlaying");
+                  AudioPlayerManager.skipForward();
+                },
+                icon: Icon(
+                  Icons.skip_next,
+                  color: Colors.white,
+                  size: 45,
+                ),
+              )),
+        ],
+      ),
     );
   }
 }
@@ -168,7 +272,7 @@ class AudioPlayerManager {
 
   static Future<void> playAudioFromAsset(String assetPath) async {
     Source audio_source = AssetSource(assetPath);
-    await audioPlayer.stop();
+    //await audioPlayer.stop();
     await audioPlayer.play(audio_source);
   }
 
@@ -178,5 +282,19 @@ class AudioPlayerManager {
 
   static Future<void> stopAudio() async {
     await audioPlayer.stop();
+  }
+
+  static Future<void> skipForward() async {
+    final position = await audioPlayer.getCurrentPosition();
+    final newPosition =
+        position! + Duration(seconds: 15); // Skip forward by 15 seconds
+    await audioPlayer.seek(newPosition);
+  }
+
+  static Future<void> skipBackward() async {
+    final position = await audioPlayer.getCurrentPosition();
+    final newPosition =
+        position! - Duration(seconds: 15); // Skip backward by 15 seconds
+    await audioPlayer.seek(newPosition);
   }
 }
