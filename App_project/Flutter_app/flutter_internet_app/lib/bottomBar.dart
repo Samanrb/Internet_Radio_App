@@ -84,7 +84,7 @@ class _MyBottonBarState extends State<MyBottonBar> {
               color: Colors.white,
               size: 25,
             ),
-            itemLabel: localization.profile,
+            itemLabel: localization.upload,
           ),
           BottomBarItem(
             inActiveItem: Icon(
