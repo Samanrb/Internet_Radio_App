@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unused_import, unused_local_variable, prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, no_leading_underscores_for_local_identifiers, unused_element
+// ignore_for_file: camel_case_types, unused_import, unused_local_variable, prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field, no_leading_underscores_for_local_identifiers, unused_element, non_constant_identifier_names
 
 import 'dart:ffi';
 import 'dart:io';
@@ -114,7 +114,7 @@ class _HomeScreen_pageState extends State<HomeScreen_page> {
             SizedBox(
               height: 20,
             ),
-            //Music_List()
+            Expanded(child: Music_List())
           ],
         ),
       ),
@@ -123,8 +123,19 @@ class _HomeScreen_pageState extends State<HomeScreen_page> {
   }
 }
 
-class Music_List extends StatelessWidget {
-  const Music_List({super.key});
+class Music_List extends StatefulWidget {
+  const Music_List({
+    super.key,
+  });
+
+  @override
+  State<Music_List> createState() => _Music_ListState();
+}
+
+class _Music_ListState extends State<Music_List> {
+  List<Musics> musicList = List.generate(15, (index) {
+    return Musics("Song $index", "Artist $index", "path: $index");
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,9 +144,9 @@ class Music_List extends StatelessWidget {
       itemBuilder: (context, index) {
         final music = musicList[index];
         return Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(5.0),
           child: SizedBox(
-            height: 100,
+            height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,7 +187,16 @@ class Music_List extends StatelessWidget {
                     size: 35,
                     color: MyAppColors().primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    debugPrint('should delete song $index');
+                    setState(() {
+                      musicList.remove(musicList[index]);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        duration: Duration(seconds: 2),
+                        content:
+                            Center(child: Text('${music.title} removed'))));
+                  },
                 ),
               ],
             ),

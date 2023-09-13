@@ -173,6 +173,6 @@ class Musics {
   Musics(this.title, this.artist, this.filePathPath);
 }
 
-List<Musics> musicList = List.generate(10, (index) {
-  return Musics("Song $index", "Artist $index", "path: $index");
-});
+// List<Musics> musicList = List.generate(10, (index) {
+//   return Musics("Song $index", "Artist $index", "path: $index");
+// });
