@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter_internet_app/Variables.dart';
+import 'package:flutter_internet_app/audioplayer_page.dart';
 import 'package:flutter_internet_app/bottomBar.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -179,7 +180,35 @@ class _Music_ListState extends State<Music_List> {
                     size: 35,
                     color: MyAppColors().primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    debugPrint('play song $index');
+                    Navigator.of(context).push(PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            AudioPlayers(toggleThemeMode: () {
+                              if (themeMode == ThemeMode.dark) {
+                                themeMode = ThemeMode.light;
+                              } else {
+                                themeMode = ThemeMode.dark;
+                              }
+                            }, selectedLanguageChanged:
+                                (Language newSelectedLanguageByUser) {
+                              locale = newSelectedLanguageByUser == Language.en
+                                  ? const Locale('en', '1')
+                                  : const Locale('fa', '98');
+                            }),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          var begin = const Offset(1.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        }));
+                  },
                 ),
                 IconButton(
                   icon: Icon(
